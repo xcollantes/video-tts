@@ -54,8 +54,9 @@ Response should be something:
 ### Call real python file
 
 ```bash
-
+uv venv
+source .venv/bin/activate
+uv sync
+uv run transcribe_pulse.py ./videos --outdir ./transcripts
 ```
-
-
 
