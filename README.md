@@ -6,12 +6,11 @@ For cheaper Youtube and Social media transcriptions in English and beyond.
 
 At the time of this writing in August 2026, i found that Pulse Pro is most cost effective.
 
-
 Quality - WER of 5.42% (lower better) which is top 3 of competitors
 Price - $0.0004 per minute so $0.024 per hour of audio
-Speed is decent at 25 RPM  
+Speed is decent at 25 RPM
 
-https://docs.smallest.ai/models/model-cards/speech-to-text/pulse-pro
+<https://docs.smallest.ai/models/model-cards/speech-to-text/pulse-pro>
 
 ## Process
 
@@ -31,23 +30,28 @@ export SMALLEST_API_KEY=
 
 ### pull out audio only
 
+Also callable at `utils/extract_audio.sh <VIDEO FILE>`, which writes to
+`outputs/<video filename>.wav`.
+
 ```bash
 ffmpeg -i <VIDEO FILE> \
-    -vn \         # Drops the video stream
-    -ac 1 \       # downmixes to mono 
-    -ar 16000 \   # resample audio
+    -vn          # Drops the video stream
+    -ac 1        # downmixes to mono
+    -ar 16000    # resample audio
     -c:a pcm_s16le \
-    audio.wav
+    outputs/<video filename>.wav
 ```
 
 ### Call the API as a test
 
+Also callable at `pulse_pro/transcribe.sh data/big_brain.wav` with test short audio data.
+
 ```bash
 curl --request POST \
-  --url "https://api.smallest.ai/waves/v1/stt/?model=pulse-pro&language=en&word_timestamps=true" \
+  --url "https://api.smallest.ai/waves/v1/stt/?model=${MODEL_NAME}&language=${LANG}" \
   --header "Authorization: Bearer $SMALLEST_API_KEY" \
-  --header "Content-Type: application/octet-stream" \  # just to test API connection
-  --data-binary "@test.wav"
+  --header "Content-Type: application/octet-stream" \
+  --data-binary "@${AUDIO_FILE_PATH}" | $OUTPUT_PATH
 ```
 
 Response should be something:
@@ -62,19 +66,31 @@ Response should be something:
 }
 ```
 
-### Call real python file
+The resulting JSON transcription will be found in the `outputs` directory.
+
+### Call real transcription
+
+Also callable at `pulse_pro/transcribe.sh path/to/audio.wav`
+
+The Python can be used for more complex scenarios like batch processing or
+custom configurations.
+
+Use the `transcribe.sh` file for simple cases.
 
 ```bash
 uv venv
 source .venv/bin/activate
 uv sync
-uv run transcribe_pulse.py ./videos --outdir ./transcripts
+uv run pulse_pro/transcribe.py ./videos --outdir ./transcripts
 ```
 
 See options:
 
+```bash
+uv run pulse_pro/transcribe.py --help
 ```
-uv run transcribe.py --help
+
+```
 usage: transcribe.py [-h] [--outdir OUTDIR] [--diarize] input
 
 positional arguments:
@@ -85,6 +101,3 @@ options:
   --outdir OUTDIR
   --diarize        request speaker labels
 ```
-
-
-
