@@ -68,7 +68,7 @@ Response should be something:
 }
 ```
 
-The resulting JSON transcription will be found in the `outputs` directory.
+The resulting SRT subtitle file will be found in the `outputs` directory.
 
 ### Call real transcription
 

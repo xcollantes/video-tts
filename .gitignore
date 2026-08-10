@@ -219,4 +219,10 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
+# Generated audio/transcript outputs
+extraction_outputs/*
+!extraction_outputs/.gitkeep
+pulse_pro/outputs/*
+!pulse_pro/outputs/.gitkeep
+
 
