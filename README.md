@@ -44,14 +44,16 @@ ffmpeg -i <VIDEO FILE> \
 
 ### Call the API as a test
 
-Also callable at `pulse_pro/transcribe.sh data/big_brain.wav` with test short audio data.
+Also callable at `cd pulse_pro && ./transcribe.sh ../data/big_brain.wav` with
+test short audio data (`transcribe.sh` writes to `../outputs`, so it must be
+run from inside `pulse_pro/`).
 
 ```bash
 curl --request POST \
   --url "https://api.smallest.ai/waves/v1/stt/?model=${MODEL_NAME}&language=${LANG}" \
   --header "Authorization: Bearer $SMALLEST_API_KEY" \
   --header "Content-Type: application/octet-stream" \
-  --data-binary "@${AUDIO_FILE_PATH}" | $OUTPUT_PATH
+  --data-binary "@${AUDIO_FILE_PATH}" > "$OUTPUT_PATH"
 ```
 
 Response should be something:
@@ -70,7 +72,7 @@ The resulting JSON transcription will be found in the `outputs` directory.
 
 ### Call real transcription
 
-Also callable at `pulse_pro/transcribe.sh path/to/audio.wav`
+Also callable at `cd pulse_pro && ./transcribe.sh ../path/to/audio.wav`
 
 The Python can be used for more complex scenarios like batch processing or
 custom configurations.
