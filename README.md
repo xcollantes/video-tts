@@ -20,6 +20,7 @@ Starting with a video file.
 
 ```bash
 brew install ffmpeg        # or: apt install ffmpeg
+brew install jq
 ```
 
 Smallest API key.
