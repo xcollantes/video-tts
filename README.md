@@ -60,3 +60,20 @@ uv sync
 uv run transcribe_pulse.py ./videos --outdir ./transcripts
 ```
 
+See options:
+
+```
+uv run transcribe.py --help
+usage: transcribe.py [-h] [--outdir OUTDIR] [--diarize] input
+
+positional arguments:
+  input            MP4 file or directory of MP4 files
+
+options:
+  -h, --help       show this help message and exit
+  --outdir OUTDIR
+  --diarize        request speaker labels
+```
+
+
+
