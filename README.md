@@ -2,6 +2,17 @@
 
 For cheaper Youtube and Social media transcriptions in English and beyond.
 
+## Pulse Pro
+
+At the time of this writing in August 2026, i found that Pulse Pro is most cost effective.
+
+
+Quality - WER of 5.42% (lower better) which is top 3 of competitors
+Price - $0.0004 per minute so $0.024 per hour of audio
+Speed is decent at 25 RPM  
+
+https://docs.smallest.ai/models/model-cards/speech-to-text/pulse-pro
+
 ## Process
 
 Starting with a video file.
